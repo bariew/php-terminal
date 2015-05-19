@@ -13,28 +13,20 @@ $this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset:
     <?php $form = ActiveForm::begin([
         'options' => [
             'name' => 'terminal',
-            'onkeydown' => "if (event.ctrlKey && event.keyCode == 13) this.submit();",
-            'onload' => "$('#terminal-content').focus();alert(123);"
+            'onkeydown' => "if (event.ctrlKey && event.keyCode == 13) $(this).submit();",
+            'onsubmit' => '$.post("", $(this).serialize(), function(data){$("#results").html(data);}); return false;'
         ]
     ]) ?>
-
-        <textarea name="Terminal[content]" class="hide" id="terminal-content"></textarea>
-        <div contenteditable="true" id="terminal-input" onkeyup="$(this).prev().text($(this).text());"
-            ><?= $model->content ?></div>
+        <textarea name="Terminal[content]"  id="terminal-input"><?= $model->content ?></textarea>
         <input type="hidden" name="Terminal[speed]">
         <input class="submit" type="submit" value=">" />
     <?php $form::end()  ?>
+
+    <input id="terminal-search"><br />
+    <div id="function-doc"></div>
+    <div class="clearfix"></div>
     <div id="results">
         <?php echo $model->result ?>
     </div>
 </div>
-<input id="terminal-search"><br />
-<div class="footer">
-    <div class="speed">
-        Speed<br />
-        <?php printf("%0.7f", $model->speed) ; ?> s.<br />
-        <?php printf("%0.7f", $model->oldSpeed); ?> s.(old)
-    </div>
-</div>
-
 <span class="home"><a href="/">HOME</a></span>

@@ -32,6 +32,9 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->evaluate();
         }
+        if (Yii::$app->request->isAjax) {
+            return $model->result;
+        }
         return $this->render('index', compact('model'));
     }
 
@@ -39,5 +42,11 @@ class SiteController extends Controller
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         return Terminal::search($term);
+    }
+
+    public function actionDoc($term)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return Terminal::docBlock($term);
     }
 }
