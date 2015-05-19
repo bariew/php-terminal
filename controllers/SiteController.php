@@ -9,32 +9,10 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\Response;
 
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     public function actions()
     {
         return [
@@ -57,8 +35,9 @@ class SiteController extends Controller
         return $this->render('index', compact('model'));
     }
 
-    public function actionSearch()
+    public function actionSearch($term)
     {
-
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return Terminal::search($term);
     }
 }

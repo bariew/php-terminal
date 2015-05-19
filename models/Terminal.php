@@ -28,8 +28,9 @@ class Terminal extends Model
         $this->speed = array_sum(explode(' ', $endTime)) - array_sum(explode(' ', $startTime));
     }
 
-    public function search($string)
+    public static function search($string)
     {
-
+        $functions = get_defined_functions();
+        return array_values(preg_grep('/^'.$string.'.*$/', $functions['internal']));
     }
 }
