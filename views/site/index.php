@@ -32,4 +32,3 @@ $this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset:
     <div class="clearfix"></div>
     <div id="function-doc"></div>
 </div>
-<span class="home"><a href="/">HOME</a></span>
