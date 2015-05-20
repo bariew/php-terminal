@@ -65,6 +65,6 @@ class Terminal extends Model
         $reflection = preg_match('/^(.*)::(.*)$/', $function, $matches)
             ? new \ReflectionMethod($matches[1], $matches[2])
             : new \ReflectionFunction($function);
-        return $reflection->getDocComment();
+        return preg_replace('/\n/', ' <br>', $reflection->getDocComment());
     }
 }

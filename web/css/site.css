@@ -8,35 +8,28 @@
     height: 300px;
     width: 60%;
 }
+#terminal-search {
+    background-color: black;
+    border: 0 none;
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+}
+.ui-menu .ui-menu-item {
+    background-color: black;
+    color: #666;
+}
 #content {
     height: 300px;
 }
 #results {
     float: left;
-    width: 60%;
-}
-ul {
-    margin: 0;
-    padding: 0 0 0 50px;
-}
-form span{
-    color: red;
-    float: left;
-    font-size: 10px;
-}
-#evalphp {
-    float:left;
-    width:100%;
+    width: 30%;
 }
 .submit{
     float: left;
     height: 300px;
     width: 30px;
-}
-.footer{
-    color: #000088;
-    margin: 10px;
-    width: 60%;
 }
 span.home {
     bottom: 0;
