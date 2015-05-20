@@ -22,13 +22,8 @@ class Terminal extends Model
         $this->oldSpeed = $this->speed;
         $startTime = microtime();
         ob_start();
-        try {
-            eval($this->content.';');
-            $this->result = ob_get_clean();
-        } catch (\Exception $e) {
-            $this->result = $e->getMessage();
-            ob_get_clean();
-        }
+        eval($this->content.';');
+        $this->result = ob_get_clean();
         $endTime = microtime();
         $this->speed = array_sum(explode(' ', $endTime)) - array_sum(explode(' ', $startTime));
     }
@@ -65,6 +60,6 @@ class Terminal extends Model
         $reflection = preg_match('/^(.*)::(.*)$/', $function, $matches)
             ? new \ReflectionMethod($matches[1], $matches[2])
             : new \ReflectionFunction($function);
-        return preg_replace('/\n/', ' <br>', $reflection->getDocComment());
+        return "<h2>$function</h2><br>" . preg_replace('/\n/', ' <br>', $reflection->getDocComment());
     }
 }

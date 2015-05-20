@@ -16,7 +16,10 @@ $this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset:
         'options' => [
             'name' => 'terminal',
             'onkeydown' => "if (event.ctrlKey && event.keyCode == 13) $(this).submit();",
-            'onsubmit' => '$.post("", $(this).serialize(), function(data){$("#results").html(data);}); return false;'
+            'onsubmit' => '$.post("", $(this).serialize())
+                .done(function(data){$("#results").html(data);})
+                .fail(function(data){$("#results").html(data.responseText);});
+                return false;'
         ]
     ]) ?>
         <textarea name="Terminal[content]"  id="terminal-input"><?= $model->content ?></textarea>
