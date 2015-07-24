@@ -11,7 +11,7 @@ $this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset:
  */
 ?>
 <div id="content">
-    <input id="terminal-search">
+    <input id="terminal-search" />
     <?php $form = ActiveForm::begin([
         'options' => [
             'name' => 'terminal',
@@ -23,7 +23,7 @@ $this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset:
         ]
     ]) ?>
         <textarea name="Terminal[content]"  id="terminal-input"><?= $model->content ?></textarea>
-        <input type="hidden" name="Terminal[speed]">
+        <input type="hidden" name="Terminal[speed]" />
         <input class="submit" type="submit" value=">" />
     <?php $form::end()  ?>
     <div id="results">
