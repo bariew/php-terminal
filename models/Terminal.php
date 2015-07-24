@@ -30,14 +30,16 @@ class Terminal extends Model
 
     public static function search($string)
     {
-        if (preg_match('/^([A-Z]+[\w\-\d]+)?(::)?(.*)$/', $string, $matches) && $matches[1]) {
+        if (preg_match('/^(\w*\\\\[\\\\\w-\d]+|[A-Z]+[\\\\\w-\d]+)(::)?(.*)$/', $string, $matches)
+        ) {
             $functions = $matches[2]
                 ? self::classMethodsList($matches[1])
                 : get_declared_classes();
         } else {
             $functions = get_defined_functions()['internal'];
         }
-        return array_values(preg_grep('/^'.$string.'.*$/', $functions));
+        $string = preg_replace('/^\\\\(.*)$/', '$1', $string);
+        return array_values(preg_grep('/^'.preg_quote($string).'.*$/', $functions));
     }
 
     private static function classMethodsList($class)
@@ -57,9 +59,13 @@ class Terminal extends Model
 
     public static function docBlock($function)
     {
-        $reflection = preg_match('/^(.*)::(.*)$/', $function, $matches)
-            ? new \ReflectionMethod($matches[1], $matches[2])
-            : new \ReflectionFunction($function);
+        if(preg_match('/^(.*)::(.*)$/', $function, $matches)) {
+            $reflection = new \ReflectionMethod($matches[1], $matches[2]);
+        } elseif (preg_match('/([A-Z]+[\w\-\d]+)$/', $function, $matches)) {
+            $reflection = new \ReflectionClass('\\'.$function);
+        } else {
+            $reflection = new \ReflectionFunction($function);
+        }
         return "<h3>$function</h3><br>"
             . preg_replace('/\n/', ' <br>', $reflection->getDocComment());
     }

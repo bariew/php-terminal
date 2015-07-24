@@ -22,11 +22,11 @@ $('document').ready(function(){
         },
         delay : 500,
         select : function (event, ui) {
-            var $content1 = $('#terminal-input').val().substring(
-                0, ($Terminal.offset - $Terminal.word.length));
-            var $content2 = $('#terminal-input').val().substring($Terminal.offset);
-            $('#terminal-input').val($content1 + ui.item.value + '()' + $content2);
-            $('#terminal-input').focus().setCursorPosition($Terminal.offset + (
+            var $terminalInput = $('#terminal-input');
+            var $content1 = $terminalInput.val().substring(0, ($Terminal.offset - $Terminal.word.length));
+            var $content2 = $terminalInput.val().substring($Terminal.offset);
+            $terminalInput.val($content1 + ui.item.value + '()' + $content2);
+            $terminalInput.focus().setCursorPosition($Terminal.offset + (
                 ui.item.value.length - $Terminal.word.length + 1
             ));
             $.get("/site/doc", {term : ui.item.value}, function(data) {
