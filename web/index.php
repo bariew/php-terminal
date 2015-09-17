@@ -5,6 +5,7 @@ if (preg_match('/^.*(dev|loc)$/', $_SERVER['HTTP_HOST'])) {
 }
 require(__DIR__ . '/../vendor/autoload.php');
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
+require(__DIR__ . '/../models/Decode.php');
 
 $config = require(__DIR__ . '/../config/web.php');
 
