@@ -1,11 +1,10 @@
 <?php
+
 use yii\widgets\ActiveForm;
 use app\models\Terminal;
 /* @var $this yii\web\View */
 $this->title = Yii::$app->name;
-$this->registerJsFile('@web/js/textarea-caret-position-master/index.js', ['depends' => \app\assets\AppAsset::className()]);
-$this->registerJsFile('@web/js/terminal.js', ['depends' => \app\assets\AppAsset::className()]);
-\yii\jui\JuiAsset::register($this);
+
 /**
  * @var Terminal $model
  */

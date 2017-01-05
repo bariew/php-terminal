@@ -14,6 +14,10 @@ return [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+            'linkAssets' => (DIRECTORY_SEPARATOR == '/'), // if not windows :)
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

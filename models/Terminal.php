@@ -67,6 +67,6 @@ class Terminal extends Model
             $reflection = new \ReflectionFunction($function);
         }
         return "<h3>$function</h3><br>"
-            . preg_replace('/\n/', ' <br>', $reflection->getDocComment());
+            .'<pre>'.($reflection->getDocComment() ? : $reflection).'</pre>';
     }
 }

@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace app\assets;
+namespace app\views;
 
 use yii\web\AssetBundle;
 
@@ -15,14 +15,16 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    public $sourcePath = '@webroot/themes/default';
     public $css = [
         'css/site.css',
     ];
     public $js = [
+        'js/textarea-caret-position-master/index.js',
+        'js/terminal.js'
     ];
     public $depends = [
+        'yii\jui\JuiAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];

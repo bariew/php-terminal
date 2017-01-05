@@ -11,14 +11,12 @@ $('document').ready(function(){
         .focus()
         .setCursorPosition($('#terminal-input').val().length)
     ;
+
     $('#terminal-search').autocomplete({
-        minLength: 3,
+        autoFocus: true,
+	    minLength: 3,
         source: function (request, response) {
-            jQuery.get("/site/search", {
-                term: request.term
-            }, function (data) {
-                response(data);
-            });
+            jQuery.get("/site/search", {term: request.term}, function (data) {response(data);});
         },
         delay : 500,
         select : function (event, ui) {
@@ -40,9 +38,7 @@ $('document').ready(function(){
         }
     });
     $('#terminal-input').keyup(function(event){
-        //console.log(event.keyCode);
         if (event.keyCode == 40 && $('.ui-autocomplete li').length) {
-            $('#terminal-search').trigger(jQuery.Event( 'keydown', { keyCode: 40, which: 40 }));
             $('.ui-autocomplete li').eq(0).focus();
             return false;
         }
