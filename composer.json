@@ -11,8 +11,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "fxp/composer-asset-plugin": "*",
-        "yiisoft/yii2": ">=2.0.5",
+        "fxp/composer-asset-plugin": "^1.0",
+        "yiisoft/yii2": "2.0.35",
         "yiisoft/yii2-bootstrap": "*",
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-jui": "dev-master"
@@ -42,5 +42,14 @@
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
         }
-    }
+    },
+    "repositories": [
+        {
+            "packagist": false
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.org/"
+        }
+    ]
 }

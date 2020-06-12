@@ -37,7 +37,7 @@ class Decode
                     $i += 5;
                     break;
                 case ($ord_chrs_c >= 0x20) && ($ord_chrs_c <= 0x7F):
-                    $utf8 .= $chrs{$i};
+                    $utf8 .= $chrs[$i];
                     break;
                 case ($ord_chrs_c & 0xE0) == 0xC0:
                     // characters U-00000080 - U-000007FF, mask 110XXXXX
@@ -95,7 +95,7 @@ class Decode
             return mb_convert_encoding($utf16, 'UTF-8', 'UTF-16');
         }
 
-        $bytes = (ord($utf16{0}) << 8) | ord($utf16{1});
+        $bytes = (ord($utf16[0]) << 8) | ord($utf16[1]);
 
         switch (true) {
             case ((0x7F & $bytes) == $bytes):

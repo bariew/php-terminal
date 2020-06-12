@@ -30,7 +30,7 @@ class Terminal extends Model
 
     public static function search($string)
     {
-        if (preg_match('/^(\w*\\\\[\\\\\w-\d]+|[A-Z]+[\\\\\w-\d]+)(::)?(.*)$/', $string, $matches)
+        if (preg_match('/^(\w*\\\\[-\\\\\w\d]+|[A-Z]+[-\\\\\w\d]+)(::)?(.*)$/', $string, $matches)
         ) {
             $functions = $matches[2]
                 ? self::classMethodsList($matches[1])
