@@ -6,6 +6,7 @@ class Terminal extends Model
 {
     public $content;
     public $speed;
+    public $language;
     public $result;
 
     public $oldSpeed;
@@ -13,7 +14,7 @@ class Terminal extends Model
     public function rules()
     {
         return [
-            [['content', 'speed'], 'safe']
+            [['content', 'speed', 'language'], 'safe']
         ];
     }
 
@@ -21,8 +22,14 @@ class Terminal extends Model
     {
         $this->oldSpeed = $this->speed;
         $startTime = microtime();
-        ob_start();
-        eval($this->content.';');
+	ob_start();
+	if ($this->language == 'python') {
+	    $file = sys_get_temp_dir() . '/tmp.py';
+	    file_put_contents($file, $this->content);
+	    echo shell_exec("python3 {$file} 2>&1");
+	} else {
+            eval($this->content.';');
+	}
         $this->result = ob_get_clean();
         $endTime = microtime();
         $this->speed = array_sum(explode(' ', $endTime)) - array_sum(explode(' ', $startTime));
@@ -68,5 +75,10 @@ class Terminal extends Model
         }
         return "<h3>$function</h3><br>"
             .'<pre>'.($reflection->getDocComment() ? : $reflection).'</pre>';
+    }
+
+    public static function languageList()
+    {
+    	return ['php', 'python'];
     }
 }

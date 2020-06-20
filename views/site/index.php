@@ -21,7 +21,12 @@ $this->title = Yii::$app->name;
                 return false;'
         ]
     ]) ?>
-        <textarea name="Terminal[content]"  id="terminal-input"><?= $model->content ?></textarea>
+	<select name="Terminal[language]">
+	<?php foreach ($model::languageList() as $language): ?>
+		<option value="<?= $language ?>" <?= ($model->language==$language ? 'selected="selected"' : ""); ?>><?= $language ?></option>
+	<?php endforeach; ?>
+	</select>
+	<textarea name="Terminal[content]"  id="terminal-input"><?= $model->content ?></textarea>
         <input type="hidden" name="Terminal[speed]" />
         <input class="submit" type="submit" value=">" />
     <?php $form::end()  ?>
